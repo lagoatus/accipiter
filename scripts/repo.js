@@ -5,22 +5,16 @@
 
   repos.requestRepos = function(callback) {
     $.ajax({
-      url: 'https://api.github.com/users/lagoatus/repos',
+      url: '/github/users/lagoatus/repos' +
+             '?per_page=100' +
+             '&sort=updated',
       type: 'GET',
-      headers: {
-        'Authorization' : 'token ' + githubToken
-      },
-      success: function(data, message, xhr){
-        console.log('success');
+      success: function(data, message, xhr) {
         repos.all = data;
-        console.log(repos.all);
-      },
-      error: function(error){
-        console.log('error');
       }
-    }).then(callback);
-
+    }).done(callback);
   };
+
   // repos.with = function(attr) {
   //   return repos.all.filter(function(repo) {
   //     return repo[attr];
